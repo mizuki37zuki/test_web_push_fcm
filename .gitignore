@@ -25,3 +25,4 @@ yarn-error.log*
 
 venv/
 test-web-push-fcm-firebase-adminsdk.json
+__pycache__
