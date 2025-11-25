@@ -24,7 +24,8 @@ messaging.onBackgroundMessage((payload) => {
   self.registration.showNotification(payload.data.title, {
     body: payload.data.body,
     data: {
-      path: payload.data.path
+      path: payload.data.path,
+      targetId: payload.data.targetId,
     }
   });
 });
@@ -33,9 +34,18 @@ messaging.onBackgroundMessage((payload) => {
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
 
-  const target = event.notification?.data?.path || "/"
+  const targetPath = event.notification?.data?.path || "/"
+  const targetId = event.notification?.data?.targetId
+
+  // デフォルトのURL
+  const origin = self.location.origin;
+
+  const url = new URL(targetPath, origin);
+  if (targetId) {
+    url.searchParams.set("id", targetId);
+  }
 
   event.waitUntil(
-    clients.openWindow(`https://cosfulu.com${target}`)
+    clients.openWindow(url.toString())
   );
 });

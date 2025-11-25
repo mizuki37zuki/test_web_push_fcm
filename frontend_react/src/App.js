@@ -1,9 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { generateToken, getPermission, messaging } from './push/firebase';
 import { onMessage } from 'firebase/messaging';
 import PermissionModal from './components/PermissionModal';
+import TestPage from './pages/Test';
+import HomePage from './pages/Home';
 
 function App() {
   const [permission, setPermission] = useState(getPermission());
@@ -30,9 +33,11 @@ function App() {
 
   useEffect(() => {
     // フォアグラウンド通知（アプリを開いている最中）を受け取るときに実行
-    // onMessage(messaging, (payload) => {
-    //   console.log('[App.js] フォアグラウンドで通知を受け取りました', payload);
-    // });
+    onMessage(messaging, (payload) => {
+      console.log('[App.js] フォアグラウンドで通知を受け取りました', payload);
+
+
+    });
     
 
   // const unsubscribe = onMessage(messaging, (payload) => {
@@ -43,19 +48,19 @@ function App() {
   //   unsubscribe();
   // };
 
-    navigator.serviceWorker.addEventListener("message", (event) => {
-      const data = event.data;
-      console.log("通知クリックで受け取ったデータ:", data);
+    // navigator.serviceWorker.addEventListener("message", (event) => {
+    //   const data = event.data;
+    //   console.log("通知クリックで受け取ったデータ:", data);
 
-    if (data?.url) {
-      console.log("ここに遷移する予定:", data.url);
-    }
-    })
+    // if (data?.url) {
+    //   console.log("ここに遷移する予定:", data.url);
+    // }
+    // })
   }, []);
 
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -74,10 +79,14 @@ function App() {
         {(!fcmToken || permission !== "granted") && (
           <PermissionModal requestPermission={handleGrant} />
         )}
-      </header>
+      </header> */}
 
-      {/* <button onClick={handleGrant}>通知権限を付与</button>
-      <button onClick={handleRevoke}>通知権限を削除</button> */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/test" element={<TestPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

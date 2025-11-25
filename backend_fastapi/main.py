@@ -26,12 +26,13 @@ async def root():
     return {"message": "Hello World"}
 
 @app.post("/send_push/")
-def send_push(token: str, path: str):
+def send_push(token: str, path: str, target_id: str):
     message = messaging.Message(
         data={
             "title": "Pythonからのメッセージ！！！",
             "body": "ここが本文です",
             "path": path,
+            "targetId": target_id
         },
         token=token,
     )
