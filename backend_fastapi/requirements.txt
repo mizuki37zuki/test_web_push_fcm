@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+dotenv
+pydantic
+sqlalchemy
+pywebpush
+firebase-admin
+# supabase
+# python-multipart
+# cryptography
