@@ -70,7 +70,7 @@ function App() {
         </a>
 
         <p>通知権限: {permission}</p>
-        {fcmToken && <p>FCMトークン: {fcmToken}</p>}
+        {fcmToken && <p style={{ wordBreak: "break-all", fontSize: "16px" }}>FCMトークン: {fcmToken}</p>}
         {(!fcmToken || permission !== "granted") && (
           <PermissionModal requestPermission={handleGrant} />
         )}
