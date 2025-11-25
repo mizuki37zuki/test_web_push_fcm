@@ -26,8 +26,8 @@ async def root():
     return {"message": "Hello World"}
 
 @app.post("/send_push/")
-def send_push():
-    registration_token = "f05Mjz9Q733uxPKhPw6spC:APA91bG8U0JzQ-e8i5xiZ99MEQCDDIhBcn0gsEAr40-xh97XiZuK9cIZWzlpfaVECh6L5M24isaFOCMadUHIBJB3CCN3GwelatGEpkqKJN8zenLA2QBTVds"
+def send_push(token: str):
+    # registration_token = "f05Mjz9Q733uxPKhPw6spC:APA91bG8U0JzQ-e8i5xiZ99MEQCDDIhBcn0gsEAr40-xh97XiZuK9cIZWzlpfaVECh6L5M24isaFOCMadUHIBJB3CCN3GwelatGEpkqKJN8zenLA2QBTVds"
 
     message = messaging.Message(
         notification=messaging.Notification(
@@ -39,7 +39,7 @@ def send_push():
         #         link=FRONT_URL  # HTTPSじゃないとだめみたい
         #     )
         # ),
-        token=registration_token,
+        token=token,
     )
 
     # message = messaging.Message(
