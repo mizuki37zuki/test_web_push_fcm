@@ -21,13 +21,13 @@ messaging.onBackgroundMessage((payload) => {
   );
 
   // 通知バナーを表示
-  self.registration.showNotification(payload.data.title, {
-    body: payload.data.body,
-    data: {
-      path: payload.data.path,
-      targetId: payload.data.targetId,
-    }
-  });
+  // self.registration.showNotification(payload.data.title, {
+  //   body: payload.data.body,
+  //   data: {
+  //     path: payload.data.path,
+  //     targetId: payload.data.targetId,
+  //   }
+  // });
 });
 
 // 通知をクリックしたら、ウィンドウを開くかフォーカスする
